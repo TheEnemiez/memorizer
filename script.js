@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     let flashTimeout;
-
+  
     const grid = document.getElementById('grid');
     const startButton = document.getElementById('startButton');
     const levelDisplay = document.getElementById('level');
