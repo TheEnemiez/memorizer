@@ -362,17 +362,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     function getGridSize(level) {
-        return level <= 1000 ? [3, 3] :
-            level <= 2000 ? [4, 3] :
-                level <= 3000 ? [4, 4] :
-                    level <= 4000 ? [4, 5] : [5, 5];
+        return level <= 100 ? [3, 3] :
+            level <= 250 ? [4, 3] :
+                level <= 500 ? [4, 4] :
+                    level <= 1000 ? [4, 5] : [5, 5];
     }
 
     function getFlashDuration(level) {
-        return level <= 1000 ? 1000 :
-            level <= 2000 ? 800 :
-                level <= 3000 ? 600 :
-                    level <= 4000 ? 500 : 400;
+        return level <= 100 ? 1000 :
+            level <= 250 ? 800 :
+                level <= 500 ? 600 :
+                    level <= 1000 ? 500 : 400;
     }
 
 
