@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Watchu Lookin At</title>
+		<link rel="stylesheet" href="styles.css" />
+		<link rel="icon" href="icon.png" />
+	</head>
+	<body class="back-row-toggle splat-toggle">
+		<div class="rain front-row"></div>
+		<div class="rain back-row"></div>
+		<div class="sidebar">
+			<h3>Win Streak: <span id="winStreak">0</span></h3>
+			<h3>Daily Streak: <span id="dailyStreak">0</span></h3>
+			<h3>All Wins: <span id="allWins">0</span></h3>
+			<h3>All Losses: <span id="allLosses">0</span></h3>
+			<h3>Best WS: <span id="bestWinStreak">0</span></h3>
+			<h3>Best DS: <span id="bestDailyStreak">0</span></h3>
+			<div id="shop">
+				<h3>Shop</h3>
+				<div id="themes"></div>
+				<button id="resetButton">Reset Stats</button>
+			</div>
+			<button id="hardModeButton">Toggle Hard Mode</button>
+		</div>
+
+		<div class="container">
+			<h2>Made by: TheEnemiez</h2>
+			<p id="level">Level: 1</p>
+			<div id="grid" class="grid"></div>
+			<div id="startButton"></div>
+		</div>
+
+		<!-- Custom Popup -->
+		<div id="confirmationPopup" class="popup">
+			<div class="popup-content">
+				<h3>Confirm Reset</h3>
+				<p>Are you sure you want to reset your stats? This action cannot be undone.</p>
+				<div class="button-container">
+					<button id="confirmReset">Yes</button>
+					<button id="cancelReset">No</button>
+				</div>
+			</div>
+		</div>
+
+		<script src="script.js"></script>
+	</body>
+</html>
