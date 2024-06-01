@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     let flashTimeout;
-  
+
     const grid = document.getElementById('grid');
     const startButton = document.getElementById('startButton');
     const levelDisplay = document.getElementById('level');
@@ -42,6 +42,15 @@ document.addEventListener('DOMContentLoaded', () => {
     let hardAllLosses = parseInt(localStorage.getItem('hardAllLosses')) || 0;
     let hardBestWinStreak = parseInt(localStorage.getItem('hardBestWinStreak')) || 0;
     let hardBestDailyStreak = parseInt(localStorage.getItem('hardBestDailyStreak')) || 0;
+
+    const toggleSidebarButton = document.getElementById('toggleSidebar');
+    const sidebar = document.querySelector('.sidebar');
+
+    toggleSidebarButton.addEventListener('click', () => {
+        sidebar.classList.toggle('sidebar-open');
+        sidebar.classList.toggle('sidebar-closed');
+        toggleSidebarButton.textContent = sidebar.classList.contains('sidebar-closed') ? '>' : '<';
+    });
 
     updateDisplays();
 
@@ -401,11 +410,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-
-
     function createGrid(rows, cols) {
-        grid.style.gridTemplateColumns = `repeat(${cols}, 100px)`;
-        grid.style.gridTemplateRows = `repeat(${rows}, 100px)`;
+        grid.style.gridTemplateColumns = `repeat(${cols},60px)`;
+        grid.style.gridTemplateRows = `repeat(${rows},60px)`;
         grid.innerHTML = '';
 
         for (let i = 0; i < rows * cols; i++) {
@@ -710,12 +717,10 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateShop() {
         console.log('Updating shop...');
         themesContainer.innerHTML = '';
-
-        // Define unlock requirements for each theme
         const unlockRequirements = {
-            "Cotton": 500, // normal winstreak required
-            "Ocean": 30, // daily streak required
-            "Phoenix": 100 // hard mode winstreak required
+            "Cotton": 500,
+            "Ocean": 30,
+            "Phoenix": 100
         };
 
         for (const [themeName, themeData] of Object.entries(themes.themes)) {
@@ -829,6 +834,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     confirmResetButton.addEventListener('click', () => {
         resetStats();
+        updateShop();
+        updateDisplays();
+        applyTheme('Default');
+        const [rows, cols] = getGridSize(level);
+        flashDuration = getFlashDuration(level);
+        createGrid(rows, cols);
+        flashRandomCells();
+        startButton.style.display = 'block';
+        sidebar.classList.add('sidebar-closed');
+        sidebar.classList.remove('sidebar-open');
+        toggleSidebarButton.textContent = '>';
         confirmationPopup.style.display = 'none';
     });
 
@@ -840,20 +856,23 @@ document.addEventListener('DOMContentLoaded', () => {
         hardModeButton.disabled = true;
         hardMode = !hardMode;
         updateDisplays();
-
-
         hardModeButton.textContent = hardMode ? 'Toggle Normal Mode' : 'Toggle Hard Mode';
-
-
         clearTimeout(flashTimeout);
 
-
         if (hardMode) {
+            startButton.style.display = 'block';
+            sidebar.classList.add('sidebar-closed');
+            sidebar.classList.remove('sidebar-open');
+            toggleSidebarButton.textContent = '>';
             const [rows, cols] = getGridSize(hardLevel);
             flashDuration = getFlashDuration(hardLevel);
             createGrid(rows, cols);
             flashRandomCells(true);
         } else {
+            startButton.style.display = 'block';
+            sidebar.classList.add('sidebar-closed');
+            sidebar.classList.remove('sidebar-open');
+            toggleSidebarButton.textContent = '>';
             const [rows, cols] = getGridSize(level);
             flashDuration = getFlashDuration(level);
             createGrid(rows, cols);
